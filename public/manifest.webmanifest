@@ -1,0 +1,14 @@
+{
+    "name": "Budget Tracker",
+    "short_name": "Budget App",
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "",
+    "background_color": "",
+    "description": "App to track and update budget whether online or offline.",
+    "icons": [{
+      "src": "",
+      "sizes": "72x72",
+      "type": "image/png"
+    }]
+}
