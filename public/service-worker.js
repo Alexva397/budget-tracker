@@ -1,5 +1,5 @@
-const STATIC_CACHE_NAME = "static-cache-v2";
-const DATE_CACHE_NAME = "data-cache-v1";
+const STATIC_CACHE_NAME = "static-cache-v1";
+const DATA_CACHE_NAME = "data-cache-v1";
 const FILES_TO_CACHE = [
     "/",
     "/index.html",
@@ -11,9 +11,6 @@ const FILES_TO_CACHE = [
 ];
 
 self.addEventListener("install", function (evt) {
-    evt.waitUntil(
-      caches.open(DATA_CACHE_NAME).then((cache) => cache.add("/api/transaction"))
-    );
     evt.waitUntil(
       caches.open(STATIC_CACHE_NAME).then((cache) => cache.addAll(FILES_TO_CACHE))
     );
@@ -62,10 +59,15 @@ self.addEventListener("fetch", function(evt) {
     }
   
     evt.respondWith(
-      caches.open(STATIC_CACHE_NAME).then(cache => {
-        return cache.match(evt.request).then(response => {
-          return response || fetch(evt.request);
-        });
-      })
+        fetch(evt.request).catch(function () {
+            return cache.match(evt.request).then(response => {
+            return response || caches.match("/");
+        })
+    })
+    //   caches.open(STATIC_CACHE_NAME).then(cache => {
+    //     return cache.match(evt.request).then(response => {
+    //       return response || fetch(evt.request);
+    //     });
+    //   })
     );
   });
