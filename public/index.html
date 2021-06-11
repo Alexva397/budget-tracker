@@ -44,12 +44,13 @@
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   <script src="/assets/js/index.js"></script>
+  <!-- <script src="/assets/js/db.js"></script> -->
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
         navigator.serviceWorker.register("service-worker.js")
-        .then(req => {
-          console.log("service Worker found", req);
+        .then(reg => {
+          console.log("service Worker found", reg);
         });
       });
     }
