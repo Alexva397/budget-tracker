@@ -1,10 +1,10 @@
 let db;
 let budgetVersion;
 
-const request = indexedDB.open('budgetDB', budgetVersion || 2);
+const request = indexedDB.open("budgetDB", budgetVersion || 2);
 
 request.onupgradeneeded = function (event) {
-    console.log('Upgrade needed in IndexDB');
+    console.log("Upgrade needed in IndexDB");
   
     const { oldVersion } = event;
     const newVersion = event.newVersion || db.version;
@@ -14,7 +14,7 @@ request.onupgradeneeded = function (event) {
     db = event.target.result;
   
     if (db.objectStoreNames.length === 0) {
-        db.createObjectStore('BudgetStore', { autoIncrement: true });
+        db.createObjectStore("BudgetStore", { autoIncrement: true });
     }
 };
 
@@ -23,33 +23,33 @@ request.onerror = function (event) {
   };
 
 function checkDatabase() {
-console.log('check db invoked');
+console.log("check db invoked");
 
-    let transaction = db.transaction(['BudgetStore'], 'readwrite');
+    let transaction = db.transaction(["BudgetStore"], "readwrite");
 
-    const store = transaction.objectStore('BudgetStore');
+    const store = transaction.objectStore("BudgetStore");
 
     const getAll = store.getAll();
 
 getAll.onsuccess = function () {
     if (getAll.result.length > 0) {
-    fetch('/api/transaction/bulk', {
-        method: 'POST',
+    fetch("/api/transaction/bulk", {
+        method: "POST",
         body: JSON.stringify(getAll.result),
         headers: {
-        Accept: 'application/json, text/plain, */*',
-        'Content-Type': 'application/json',
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
         },
     })
         .then((response) => response.json())
         .then((res) => {
         if (res.length !== 0) {
-            transaction = db.transaction(['BudgetStore'], 'readwrite');
+            transaction = db.transaction(["BudgetStore"], "readwrite");
 
-            const currentStore = transaction.objectStore('BudgetStore');
+            const currentStore = transaction.objectStore("BudgetStore");
 
             currentStore.clear();
-            console.log('Clearing store 🧹');
+            console.log("Clearing store 🧹");
         }
         });
     }
@@ -57,22 +57,22 @@ getAll.onsuccess = function () {
 }
 
 request.onsuccess = function (event) {
-    console.log('success');
+    console.log("success");
     db = event.target.result;
 
     if (navigator.onLine) {
-        console.log('Backend online! 🗄️');
+        console.log("Backend online! 🗄️");
         checkDatabase();
     }
 };
 
 const saveRecord = (record) => {
-    console.log('Save record invoked');
-    const transaction = db.transaction(['BudgetStore'], 'readwrite');
+    console.log("Save record invoked");
+    const transaction = db.transaction(["BudgetStore"], "readwrite");
 
-    const store = transaction.objectStore('BudgetStore');
+    const store = transaction.objectStore("BudgetStore");
 
     store.add(record);
 };
 
-window.addEventListener('online', checkDatabase);
+window.addEventListener("online", checkDatabase);
