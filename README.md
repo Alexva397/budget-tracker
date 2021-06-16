@@ -7,23 +7,21 @@
 
 
 
-## [Test The Workout Tracker Here!](https://infinite-journey-27278.herokuapp.com/)
+## [Test The Budget Tracker Here!](https://powerful-meadow-14011.herokuapp.com/)
 
 
 
 ## Description
 
-This app is design for the user to record and track their workouts over a 7 day period.
+The Budget Tracker allows the user to track their budget from a simple interface, with a history to easily reference.
 
-The user is able to create workouts with multiple exercies.
+This app is designed as a Progressive Web App, giving the user the option to download the app on their Desktop, tablet or smart phone.
 
-Each exercise is divided into resistance and cardio and the user is able to input data such as individual workout durations, cardio distance, weight lifted, sets, reps, etc. 
+The user's current balance is displayed, along with a line chart showing their transaction history. Simply name your transaction, specify the amount, and click add or subtract!
 
-The user is able to view their 7 day workout history when clicking on the dashboard button in the navbar. 
+It offers offline capabilities. The user can make edits to their budget with no interent connection and these edits will be updated to the database once internet connection is restored.
 
-The Dashboard includes charts displaying data from the users previous 7 workouts.
-
-
+You can test out and download the Budget Tracker by clicking the link above, or follow the instructions in installation/usage to run on your local machine.
 
 
 
@@ -49,13 +47,9 @@ The Dashboard includes charts displaying data from the users previous 7 workouts
  npm i
  ```
 
- from withing the main directory of the app.
+ from within the main directory of the app.
 
- The user must then seed their database by running:
-
- ```
- node seeders/seed.js
- ```
+ The budget tracker is now ready for use.
 
 
 
@@ -67,7 +61,7 @@ Run the following on the command line to launch the app:
 node server.js
 ```
 
-From here, the user can visit [http://localhost:3000](http://localhost:3000/) to use the app.
+From here, the user can visit [http://localhost:3001](http://localhost:3001/) to use the app.
 
 
 
@@ -80,6 +74,8 @@ This App utilizes the following technologies:
   - Express.js
   - Mongoose
   - Morgan
+  - Webpack/Service-worker
+  - IndexedDB
 
 
 
@@ -110,3 +106,5 @@ If you would like to contribute to the repository, please contact me at one of t
   [LinkedIn](https://www.linkedin.com/in/alexander-vadeboncoeur-287039aa/)
 
   [asvadeboncoeur@gmail.com](mailto:asvadeboncoeur@gmail.com)
+
+
